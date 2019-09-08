@@ -30,37 +30,94 @@
  */
 
 function spiralLoop(arr) {
-  var toRight = recursiveLoop(arr, arr.length, 0)
-  var toBottom = recursiveLoop(
-    spinArray(arr, 1, arr[0].length - 1),
-    arr.length,
-    1
-  )
-  var toLeft = recursiveLoop(
-    spinArray(arr, 2, arr[0].length - 1),
-    arr.length,
-    1
-  )
-  var toTop = recursiveLoop(
-    spinArray(arr, 3, arr.length - 1),
-    arr.length - 1,
-    1
-  )
+  var directions = {
+    toRight: recursiveLoop(arr, arr.length, 0),
+    toBottom: recursiveLoop(
+      spinArray(arr, 1, arr[0].length - 1),
+      arr.length,
+      1
+    ),
+    toLeft: recursiveLoop(spinArray(arr, 2, arr[0].length - 1), arr.length, 1),
+    toTop: recursiveLoop(spinArray(arr, 3, arr.length - 1), arr.length - 1, 1)
+  }
 
   var result = []
-}
+  for (var i = 0; i < Math.ceil(arr.length / 2); i++) {
+    if (directions.toRight !== undefined) {
+      for (var j = 0; j < directions.toRight.length; j++) {
+        if (directions.toRight[j].length !== undefined) {
+          directions.toRight = directions.toRight[j]
+          break
+        }
+        result.push(directions.toRight[j])
+      }
+      if (directions.toRight === undefined || j === directions.toRight.length) {
+        directions.toRight = undefined
+      }
+    }
 
-function appendArray(arr) {
-  var result = []
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i].length !== undefined) {
-			var temp = appendArray(arr[i])
-			for (var j = 0; j < temp)
-    } else {
-      result.push(temp[i])
+    if (directions.toBottom !== undefined) {
+      for (var j = 0; j < directions.toBottom.length; j++) {
+        if (directions.toBottom[j].length !== undefined) {
+          directions.toBottom = directions.toBottom[j]
+          break
+        }
+        result.push(directions.toBottom[j])
+      }
+      if (
+        directions.toBottom === undefined ||
+        j === directions.toBottom.length
+      ) {
+        directions.toBottom = undefined
+      }
+    }
+
+    if (directions.toLeft !== undefined) {
+      for (var j = 0; j < directions.toLeft.length; j++) {
+        if (directions.toLeft[j].length !== undefined) {
+          directions.toLeft = directions.toLeft[j]
+          break
+        }
+        result.push(directions.toLeft[j])
+      }
+    }
+    if (directions.toLeft === undefined || j === directions.toLeft.length) {
+      directions.toLeft = undefined
+    }
+
+    if (directions.toTop !== undefined) {
+      for (var j = 0; j < directions.toTop.length; j++) {
+        if (directions.toTop[j].length !== undefined) {
+          directions.toTop = directions.toTop[j]
+          break
+        }
+        result.push(directions.toTop[j])
+      }
+      if (directions.toTop === undefined || j === directions.toTop.length) {
+        directions.toTop = undefined
+      }
     }
   }
+
+  return result
 }
+
+/* This function below is something, but not the solution for teh problem */
+// function appendArray(arr, depth) {
+//   var result = []
+//   for (var i = 0; i < arr.length; i++) {
+//     if (arr[i].length !== undefined) {
+//       depth--
+//       var temp = appendArray(arr[i], depth)
+//       for (var j = 0; j < temp.length; j++) {
+//         result.push(temp[j])
+//       }
+//     } else {
+//       result.push(arr[i])
+//     }
+//   }
+//   return result
+// }
 
 function recursiveLoop(arr, width, startIndex, start = 0) {
   var result = []
