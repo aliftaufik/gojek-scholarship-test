@@ -10,11 +10,6 @@
  * [16, 17, 18, 19, 20],
  * [21, 22, 23, 24, 25]]
  *
- * 5, 3, 1
- * 4, 2
- * 4, 2
- * 3, 1
- *
  * akan mereturn:
  * [1, 2, 3, 4, 5, 10, 15, 20, 25, 24, 23, 22, 21, 16, 11, 6, 7, 8, 9, 14, 19, 18, 17, 12, 13]
  *
@@ -42,6 +37,8 @@ function spiralLoop(arr) {
   }
 
   var result = []
+
+  /* This thing below me is so not modular, but I don't have any idea to make it tidier, as for now */
   for (var i = 0; i < Math.ceil(arr.length / 2); i++) {
     if (directions.toRight !== undefined) {
       for (var j = 0; j < directions.toRight.length; j++) {
@@ -102,23 +99,6 @@ function spiralLoop(arr) {
   return result
 }
 
-/* This function below is something, but not the solution for teh problem */
-// function appendArray(arr, depth) {
-//   var result = []
-//   for (var i = 0; i < arr.length; i++) {
-//     if (arr[i].length !== undefined) {
-//       depth--
-//       var temp = appendArray(arr[i], depth)
-//       for (var j = 0; j < temp.length; j++) {
-//         result.push(temp[j])
-//       }
-//     } else {
-//       result.push(arr[i])
-//     }
-//   }
-//   return result
-// }
-
 function recursiveLoop(arr, width, startIndex, start = 0) {
   var result = []
   for (var i = startIndex; i < width; i++) {
@@ -132,14 +112,6 @@ function recursiveLoop(arr, width, startIndex, start = 0) {
   }
   return result
 }
-
-/**
- * 5 10 15 20 25
- * 4  9 14 19
- * 3  8 12 16
- * 2  7 12 17
- * 1  6 11 16
- */
 
 function spinArray(arr, times, last) {
   var result = []
@@ -160,23 +132,11 @@ function spinArray(arr, times, last) {
 //  test case:
 console.log(spiralLoop([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
 // [1, 2, 3, 6, 9, 8, 7, 4, 5]
-/**
- * 3, 1
- * 2
- * 2
- * 1
- */
 
 console.log(
   spiralLoop([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])
 )
 // [1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10]
-/**
- * 4, 2
- * 3, 1
- * 3, 1
- * 2
- */
 
 console.log(
   spiralLoop([
@@ -188,3 +148,20 @@ console.log(
   ])
 )
 // [1, 2, 3, 4, 5, 10, 15, 20, 25, 24, 23, 22, 21, 16, 11, 6, 7, 8, 9, 14, 19, 18, 17, 12, 13]
+
+/* This function below is something, but not the solution for teh problem */
+// function appendArray(arr, depth) {
+//   var result = []
+//   for (var i = 0; i < arr.length; i++) {
+//     if (arr[i].length !== undefined) {
+//       depth--
+//       var temp = appendArray(arr[i], depth)
+//       for (var j = 0; j < temp.length; j++) {
+//         result.push(temp[j])
+//       }
+//     } else {
+//       result.push(arr[i])
+//     }
+//   }
+//   return result
+// }
